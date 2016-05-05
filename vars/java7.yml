@@ -1,0 +1,5 @@
+---
+java_version: 1.7.0_79
+jdk_url: http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz
+jdk_checksum: md5:9222e097e624800fdd9bfb568169ccad
+jdk_filename: jdk-7u79-linux-x64.tar.gz

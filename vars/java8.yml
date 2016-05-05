@@ -1,0 +1,5 @@
+---
+java_version: 1.8.0_66
+jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u66-b17/jdk-8u66-linux-x64.tar.gz
+jdk_checksum: sha256:7e95ad5fa1c75bc65d54aaac9e9986063d0a442f39a53f77909b044cef63dc0a
+jdk_filename: jdk-8u66-linux-x64.tar.gz

@@ -1,0 +1,55 @@
+---
+- include_vars: "java{{ java_version }}.yml"
+
+- name: get jdk
+  get_url:
+    url: "{{ jdk_url }}"
+    headers: "Cookie: oraclelicense=accept-securebackup-cookie"
+    dest: "/tmp/{{ jdk_filename }}"
+    validate_certs: no
+    checksum: "{{ jdk_checksum }}"
+
+- name: check /usr/java directory
+  file:
+    state: directory
+    path: /usr/java
+    mode: 0755
+
+- name: untar jdk to /usr/java/
+  unarchive:
+    src: "/tmp/{{ jdk_filename }}"
+    dest: /usr/java/
+    copy: no
+    creates: "/usr/java/jdk{{ java_version }}/bin/java"
+
+- name: test new java
+  shell: "/usr/java/jdk{{ java_version }}/bin/java -version 2>&1 | awk -F '\"' '/version/ {print $2}'"
+  register: java_result
+  changed_when: False
+
+- name: create link to new java
+  file:
+    state: link
+    src: "/usr/java/jdk{{ java_version}}"
+    dest: /usr/java/latest
+  when: java_result.stdout == java_version
+
+- name: test java again
+  shell: /usr/java/latest/bin/java -version 2>&1 | awk -F '"' '/version/ {print $2}'
+  register: latest_result
+  changed_when: False
+
+- name: check link to java
+  file:
+    state: link
+    src: /usr/java/latest/bin/java
+    dest: /etc/alternatives/java
+  when: latest_result.stdout == java_version
+
+- name: check other link to java
+  file:
+    state: link
+    src: /etc/alternatives/java
+    dest: /usr/bin/java
+  when: latest_result.stdout == java_version
+
