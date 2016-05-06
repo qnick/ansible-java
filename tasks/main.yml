@@ -36,23 +36,3 @@
 
 - name: Install alternatives
   script: java-alternatives-install.sh
-
-#- name: test java again
-#  shell: /usr/java/latest/bin/java -version 2>&1 | awk -F '"' '/version/ {print $2}'
-#  register: latest_result
-#  changed_when: False
-
-#- name: check link to java
-#  file:
-#    state: link
-#    src: /usr/java/latest/bin/java
-#    dest: /etc/alternatives/java
-#  when: latest_result.stdout == java_version
-
-#- name: check other link to java
-#  file:
-#    state: link
-#    src: /etc/alternatives/java
-#    dest: /usr/bin/java
-#  when: latest_result.stdout == java_version
-
