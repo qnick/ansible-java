@@ -1,5 +1,5 @@
-Installing java on specified hosts
-=================================
+Installing specified version of oracle java 
+===============================
 
 Requirements:
 ------------
@@ -15,7 +15,7 @@ Installing both 7 and 8 java versions (the last one - 7 - will became default)
 - hosts: test
   gather_facts: no
   roles:
-    - { role: java, java_version: 8 }
-    - { role: java, java_version: 7 }
+    - { role: java, version: 8 }
+    - { role: java, version: 7 }
 
 ```
