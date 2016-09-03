@@ -1,5 +1,5 @@
 ---
-- include_vars: "java{{ version }}.yml"
+- include_vars: "{{ java_vars }}"
 
 - name: get jdk
   get_url:
@@ -36,3 +36,4 @@
 
 - name: Install alternatives
   script: java-alternatives-install.sh
+  
